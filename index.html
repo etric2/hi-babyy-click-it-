@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rose Bouquet Proposal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe6e6;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        
+        #message {
+            position: absolute;
+            top: 20px;
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 20px;
+            color: #333;
+            border: 2px solid #ff9999;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        #message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        #bouquet {
+            font-size: 100px;
+            margin-bottom: 20px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        #yesBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #noBtn {
+            background-color: #ff4444;
+            color: white;
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="message"></div>
+    <div id="bouquet">💐</div>
+    <div class="buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const message = document.getElementById('message');
+        let noClickCount = 0;
+
+        function showMessage(text, duration = 3000) {
+            message.textContent = text;
+            message.classList.add('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+            }, duration);
+        }
+
+        yesBtn.addEventListener('click', () => {
+            showMessage('YAYYY you took it, it means ur my wife now! I love you so muchhh babi', 10000);
+        });
+
+        noBtn.addEventListener('click', () => {
+            noClickCount++;
+            
+            switch(noClickCount) {
+                case 1:
+                    noBtn.style.transform = 'scale(1.5)';
+                    break;
+                case 2:
+                    noBtn.style.transform = 'scale(2)';
+                    break;
+                case 3:
+                    noBtn.style.transform = 'scale(1)';
+                    showMessage('are you sureeee? if I were you I\'d click the yes button');
+                    break;
+                case 4:
+                    noBtn.style.transform = 'scale(20)';
+                    setTimeout(() => {
+                        noBtn.style.transform = 'scale(1)';
+                        noClickCount = 0;
+                    }, 2000);
+                    break;
+                default:
+                    noBtn.style.transform = 'scale(1)';
+                    noClickCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>
